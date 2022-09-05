@@ -26,12 +26,5 @@ class LayerOne(BaseRegionLabel):
     color = [1, 255, 0, 100]
     descriptions = {"walking": None, "running": None, 'cycling': None}
 
-class LayerTwo(BaseRegionLabel):
-# This label will always be shown at the lowest 20% to 80% of the plot view
-    min_height = 0.8
-    max_height = 1
-    name = "Sub-Activity"
-    descriptions = {"walking": None, "running": None, 'cycling': None}
-
 
 start_gui(plugins=[CustomImporter, CustomExporter], theme=MyTheme, labels=[LayerOne])
