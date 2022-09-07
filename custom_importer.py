@@ -7,6 +7,7 @@ from PySide2.QtWidgets import QFileDialog
 from mad_gui.components.dialogs import UserInformation
 from pathlib import Path
 import os
+import datetime
 
 class CustomImporter(BaseImporter):
     loadable_file_type = "*.*"
@@ -35,8 +36,9 @@ class CustomImporter(BaseImporter):
         # warnings.warn("Please load sensor data from your source."
         #               " Just make sure, that sensor_data is a pandas.DataFrame."
         #               " Afterwards, remove this warning.")
+        # sensor_data = pd.read_csv(file_path, names=["acc_x", "acc_y", "acc_z"])[1:]
+        #
         sensor_data = pd.read_csv(file_path)[["acc_x", "acc_y", "acc_z"]]
-
         # warnings.warn("Please load the sampling frequency from your source in Hz"
         #               " Afterwards, remove this warning.")
         sampling_rate_hz = 25
@@ -54,10 +56,15 @@ class CustomImporter(BaseImporter):
             "IMU Wrist": {
                 "sensor_data": sensor_data,
                 "sampling_rate_hz": sampling_rate_hz,
+                "start_time": sensor_data.index[0]
             }
         }
 
         return data
+
+    def get_start_time(self, *args, **kwargs) -> datetime.time:
+        sensor_data_index = pd.read_csv(args[0], names=["acc_x", "acc_y", "acc_z"])[1:].index[0]
+        return datetime.datetime.strptime(sensor_data_index, '%Y-%m-%d %H:%M:%S.%f').time()
 
 
 class CustomExporter(BaseExporter):
