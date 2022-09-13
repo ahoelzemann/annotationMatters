@@ -31,7 +31,8 @@ class Self_Recall_Labels(BaseRegionLabel):
         'car_driving': None,
         'cooking': None,
         'playing_an_instrument': None,
-        'horse_riding': None}
+        'horse_riding': None,
+        'other': None}
 
 
 start_gui(plugins=[CustomImporter, CustomExporter], theme=MyTheme, labels=[Self_Recall_Labels])
