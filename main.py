@@ -3,7 +3,6 @@ from mad_gui.plot_tools.labels import BaseRegionLabel
 
 from custom_importer import CustomImporter
 from custom_importer import CustomExporter
-from custom_label import My_Label as labels
 from mad_gui.config import BaseTheme
 from PySide2.QtGui import QColor
 from mad_gui.plugins.base import BaseImporter
@@ -18,13 +17,21 @@ class MyTheme(BaseTheme):
         "light": QColor(0, 0, 255),
     }
 
-class LayerOne(BaseRegionLabel):
+
+class Self_Recall_Labels(BaseRegionLabel):
     # This label will always be shown at the upper 20% of the plot view
-    min_height = 0.8
+    min_height = 0.6
     max_height = 1
     name = "Activity"
-    color = [1, 255, 0, 100]
-    descriptions = {"walking": None, "running": None, 'cycling': None}
+    color = [255, 0, 127, 70]
+    descriptions = {
+        'walking': None,
+        'running': None,
+        'cycling': None,
+        'car_driving': None,
+        'cooking': None,
+        'playing_an_instrument': None,
+        'horse_riding': None}
 
 
-start_gui(plugins=[CustomImporter, CustomExporter], theme=MyTheme, labels=[LayerOne])
+start_gui(plugins=[CustomImporter, CustomExporter], theme=MyTheme, labels=[Self_Recall_Labels])

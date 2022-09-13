@@ -40,21 +40,19 @@ class CustomImporter(BaseImporter):
         #               " Afterwards, remove this warning.")
         # sensor_data = pd.read_csv(file_path, names=["acc_x", "acc_y", "acc_z"])[1:]
         #
-        sampling_rate = 25
-        subject_data = []
-        paths = get_all_daily_files(file_path)
-        binary_files = list(map(readBinFile, paths))
-        for path in binary_files:
-            subject_data.append(decompress(path))
-        # concat every file in subject_data to create an array of data that contains the full day
+        # subject_data = []
+        # paths = get_all_daily_files(file_path)
+        # binary_files = list(map(readBinFile, paths))
+        # for path in paths:
+        #     subject_data.append(decompress(binary_file))
+        # # concat every file in subject_data to create an array of data that contains the full day
+        # subject_data = make_equidistant(subject_data, 25)
+        # subject_data = resample_raw_data(subject_data, 25)
 
-        subject_data = make_equidistant(subject_data, sampling_rate)
-        subject_data = pd.concat(subject_data)
-        subject_data = resample_raw_data(subject_data, sampling_rate)
-
-        # sensor_data = pd.read_csv(file_path)[["x_axis", "y_axis", "z_axis"]]
+        sensor_data = pd.read_csv(file_path)[["x_axis", "y_axis", "z_axis"]]
         # warnings.warn("Please load the sampling frequency from your source in Hz"
         #               " Afterwards, remove this warning.")
+        sampling_rate_hz = 25
         # sampling_rate_hz = 1 / sensor_data["time"].diff().mean()
 
         ##############################################################
@@ -67,17 +65,17 @@ class CustomImporter(BaseImporter):
         ##############################################################
         data = {
             "IMU Wrist": {
-                "sensor_data": subject_data[['x_axis', 'y_axis', 'z_axis']],
-                "sampling_rate_hz": sampling_rate,
-                "start_time": subject_data['index']
+                "sensor_data": sensor_data,
+                "sampling_rate_hz": sampling_rate_hz,
+                "start_time": sensor_data.index[0]
             }
         }
-        # data = .drop(columns=['B', 'C'])
 
         return data
 
     def get_start_time(self, *args, **kwargs) -> datetime.time:
-        return datetime.datetime.strptime(str(args[1]), '%Y-%m-%d %H:%M:%S.%f').time()
+        sensor_data_index = pd.read_csv(args[0], names=["x_axis", "y_axis", "z_axis"])[1:].index[0]
+        return datetime.datetime.strptime(sensor_data_index, '%Y-%m-%d %H:%M:%S.%f').time()
 
 
 class CustomExporter(BaseExporter):
@@ -228,7 +226,7 @@ def readBinFile(path):
 
 
 def make_equidistant(subject_files, new_freq):
-    # true_freqs = []
+    true_freqs = []
     new_freq_ms = int(((1 / new_freq) * 1000))
 
     for fc in range(len(subject_files)):
@@ -249,9 +247,9 @@ def make_equidistant(subject_files, new_freq):
             current_df = current_df.set_index(pd.DatetimeIndex(new_range))
 
         subject_files[fc] = current_df
-        # true_freqs.append(round(np.mean(checkfordrift(current_df))))
+        true_freqs.append(round(np.mean(checkfordrift(current_df))))
 
-    return subject_files
+    return subject_files, true_freqs
 
 
 def checkfordrift(df):
@@ -276,37 +274,10 @@ def resample_raw_data(data: pd.DataFrame, new_freq):
     new_freq_ms = int(((1 / new_freq) * 1000))
     data = data.resample(str(round(new_freq_ms)) + "ms").mean()
     data = data.interpolate()
-    data = data.reset_index()
-    # datetime.datetime.strptime(data.index, '%H:%M:%S.%f')
 
     return data
 
 
-def get_all_daily_files(file_path):
-    import glob
-    import pathlib
-
-    path = pathlib.Path(file_path).parent.resolve()
-    try:
-        bangle_id, filename = file_path.split("/")[-1].split("_")
-    except:
-        filename = file_path.split("/")[-1].split("_")[0]
-    day = filename[5:9]
-    all_file_paths = glob.glob(str(path) + "/" + "*.bin")
-    daily_files = []
-    if 'bangle_id' in locals():
-        for file in all_file_paths:
-            filename = file.split("/")[-1]
-            if filename.__contains__(day) and filename.__contains__("_d"):
-                daily_files.append(file)
-    else :
-        for file in all_file_paths:
-            filename = file.split("/")[-1]
-            if filename.__contains__(day):
-                daily_files.append(file)
-    daily_files = sorted(daily_files)
-
-    return daily_files
 
 # pseude code zum Einlesen der Binärdateien
 # _____________________________________________
