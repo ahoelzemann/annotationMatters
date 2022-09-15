@@ -77,8 +77,11 @@ class CustomImporter(BaseImporter):
         return data
 
     def get_start_time(self, *args, **kwargs) -> datetime.time:
-        return datetime.datetime.strptime(str(args[1]), '%Y-%m-%d %H:%M:%S.%f').time()
-
+        try:
+            start = datetime.datetime.strptime(str(args[1]), '%Y-%m-%d %H:%M:%S.%f').time()
+        except:
+            start = datetime.datetime.strptime(str(args[1]), '%Y-%m-%d %H:%M:%S').time()
+        return start
 
 class CustomExporter(BaseExporter):
     @classmethod
