@@ -1,7 +1,7 @@
 # How to install the software:
 
 you will need to have git https://git-scm.com/ and anaconda https://www.anaconda.com/ installed
-1. make sure that both packages are installed by opening a terminal or command line and type in: (1) git (press enter) and (2) conda (press enter). 
+1. make sure that both packages are installed by opening a terminal or command line and type in: (1) git (press enter) and (2) conda (press enter). If both programs are installed you should see a list of possible commands. 
 2. create a virgin python 3.8 environment by executing **_conda create -n mypython38 python=3.8_**  !!! change the name if you want to !!!
 3. clone this repository by executing **_git clone https://github.com/ahoelzemann/wip2.git_**
 4. cd into the new folder
