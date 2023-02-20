@@ -11,7 +11,7 @@ from tensorflow.keras.callbacks import *
 from tensorflow.keras.layers import *
 from tensorflow.keras.optimizers import *
 from tensorflow.keras.regularizers import *
-import deep_transferlearning_visualization.WandBViz as WandB_Logger
+import visualization.WandBViz as WandB_Logger
 import misc.Globals as gl
 # Clear allocated memory on GPU device
 

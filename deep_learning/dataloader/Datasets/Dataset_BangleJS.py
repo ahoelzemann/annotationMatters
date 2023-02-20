@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-import deep_transferlearning_preprocessing.Preprocessing as preprocessor
-from generic_dataloader.DataLoader import SensorDataset
+import preprocessing.Preprocessing as preprocessor
+from dataloader.DataLoader import SensorDataset
 
 
 class Dataset(SensorDataset):
@@ -94,13 +94,13 @@ def unpack(paths, resampling_freq):
 
         i += 1
 
-    subjectData, true_freqs = make_equidistant(subjectData, resampling_freq)
+    subjectData, true_freqs = resample(subjectData, resampling_freq)
     subjectData = pd.concat(subjectData, axis=0)
     subjectData = preprocessor.resample_raw_data(subjectData, resampling_freq)
     return subjectData
 
 
-def make_equidistant(subject_files, new_freq):
+def resample(subject_files, new_freq):
     true_freqs = []
 
     for fc in range(len(subject_files)):

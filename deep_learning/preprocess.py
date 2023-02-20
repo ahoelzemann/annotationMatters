@@ -1,5 +1,5 @@
 
-from generic_dataloader.Datasets.Dataset_BangleJS import Dataset as Dataset_BangleJS
+from dataloader.Datasets.Dataset_BangleJS import Dataset as Dataset_BangleJS
 from datetime import datetime
 import misc.Helper as helper
 
