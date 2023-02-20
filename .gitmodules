@@ -1,0 +1,3 @@
+[submodule "mad-gui-adaptions"]
+	path = mad-gui-adaptions
+	url = https://github.com/ahoelzemann/mad-gui-adaptions.git
