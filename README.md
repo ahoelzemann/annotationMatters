@@ -14,6 +14,6 @@ The datasets generated during and/or analysed during the current study are avail
 The repository contains additional information about the dataset.
 
 ## Available log files of experiments
-Logs that contain the F1-Score on all evaluated participants are available on Weights and Biases https://tinyurl.com/4vxvfaed.
+Logs of our deep learning experiments across all evaluated participants are available on Weights and Biases https://tinyurl.com/4vxvfaed.
 
 For further questions please contact alexander.hoelzemann@uni-siegen.de
