@@ -6,4 +6,4 @@ However, we further developed the dataloader and preprocessing and visualized th
 
 Please contact me if you have further questions regarding the code: alexander.hoelzemann@uni-siegen.de
 
-![The overall mean F1-Scores for the Leave-One-Day-Out Cross Validation across all participants.](./results/avg_f1.png "Final F1-Scores of classifiers trained with different labelling methods.")
+

@@ -13,6 +13,11 @@ Furthermore, we discuss the advantages and disadvantages of the methods compared
 The datasets generated during and/or analysed during the current study are available in the Zenodo repository: https://doi.org/10.5281/zenodo.7654684.
 The repository contains additional information about the dataset.
 
+## Results 
+Average F1-Scores as evaluated per week and annotation method.
+<p align="center">
+  <img width="55vw" height="" src="figures/avg_f1.png">
+</p>
 ## Available log files of experiments
 Logs of our deep learning experiments across all evaluated participants are available on Weights and Biases https://tinyurl.com/4vxvfaed.
 
