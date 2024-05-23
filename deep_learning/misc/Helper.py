@@ -104,9 +104,9 @@ def label_data(subject, week):
     import numpy as np
     import bisect
     import datetime
-    possible_labels = ['void', 'sitting', 'walking', 'running', 'car_driving', 'cycling', 'badminton', 'showering',
-                       'horse_riding', 'table_tennis', 'eating', 'gardening', 'playing_games', 'dish_washing',
-                       'cooking', 'cleaning', 'vacuum_cleaning', 'laundry', 'weightlifting', 'other']
+    possible_labels = [possible_labels = ['laying', 'sitting', 'walking', 'running', 'cycling', 'bus_driving', 'car_driving', 'cleaning', 'vacuum_cleaning', 'laundry', 
+                           'cooking', 'eating', 'shopping', 'showering', 'yoga', 'sport', 'playing_games', 'desk_work', 'guitar_playing', 'gardening', 'table_tennis', 
+                           'badminton', 'horse_riding', 'cleaning', 'reading', 'weightlifting', 'manual_work', 'dish_washing']]
     try:
         labels = pd.read_csv(
             "../dataset/labels/" + week + "_" + subject + ".csv")
