@@ -18,8 +18,8 @@ class Dataset(SensorDataset):
 
         import glob
         import os.path
-        decompressed_folder = '/home/ahoelzemann/remote_projects/deep_tl/local_files/PerCom2023/preprocessed/'
-        raw_folder = '/home/ahoelzemann/remote_projects/deep_tl/local_files/PerCom2023/raw/'
+        decompressed_folder = 'folder'
+        raw_folder = 'folder'
         self.windows = {}
         subfolders_weeks = ['week1', 'week2']
         subfolders_days = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7']
@@ -38,11 +38,11 @@ class Dataset(SensorDataset):
     def get_gui_label_timestamps(self, subject=None):
         import os
 
-        possible_labels = ['void', 'sitting', 'walking', 'running', 'car_driving', 'cycling', 'badminton', 'showering',
-                           'horse_riding', 'table_tennis', 'eating', 'gardening', 'playing_games', 'dish_washing',
-                           'cooking', 'cleaning', 'vacuum_cleaning', 'laundry', 'weightlifting', 'other']
-        decompressed_folder = '/home/ahoelzemann/remote_projects/deep_tl/local_files/PerCom2023/preprocessed/'
-        raw_folder = '/home/ahoelzemann/remote_projects/deep_tl/local_files/PerCom2023/raw/'
+        possible_labels = ['laying', 'sitting', 'walking', 'running', 'cycling', 'bus_driving', 'car_driving', 'cleaning', 'vacuum_cleaning', 'laundry', 
+                           'cooking', 'eating', 'shopping', 'showering', 'yoga', 'sport', 'playing_games', 'desk_work', 'guitar_playing', 'gardening', 'table_tennis', 
+                           'badminton', 'horse_riding', 'cleaning', 'reading', 'weightlifting', 'manual_work', 'dish_washing']
+        decompressed_folder = 'folder'
+        raw_folder = 'folder'
         subfolders_weeks = ['week2']
         subfolders_days = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7']
         result = []
